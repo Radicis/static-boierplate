@@ -1,0 +1,7 @@
+@import "./partials/_reset";
+@import "./partials/_vars";
+
+html, body {
+  color: $font-main;
+  background-color: $background-main;
+}
