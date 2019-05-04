@@ -12,6 +12,7 @@ module.exports = {
         use: ["babel-loader"]
       },
       {
+        enforce: "pre",
         test: /\.js$/,
         exclude: /node_modules/,
         use: ["babel-loader", "eslint-loader"]
@@ -26,6 +27,18 @@ module.exports = {
           {
             loader: "html-loader",
             options: { minimize: false }
+          }
+        ]
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+              outputPath: "fonts/"
+            }
           }
         ]
       }

@@ -1,2 +1,7 @@
-$font-main: #333;
+$font-main: #222;
+$font-light: lighten($font-main, 10%);
+$font-faded: lighten($font-main, 30%);
+
 $background-main: #eee;
+$background-light: lighten($background-main, 20%);
+$background-dark: darken($background-main, 90%);

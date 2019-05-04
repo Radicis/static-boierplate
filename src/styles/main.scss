@@ -1,7 +1,14 @@
 @import "./partials/_reset";
 @import "./partials/_vars";
+@import "./partials/_typography";
+@import "./partials/_layout";
 
-html, body {
-  color: $font-main;
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  color: $font-faded;
   background-color: $background-main;
 }

@@ -1,0 +1,22 @@
+@import "./vars";
+@import "../mixins/fonts";
+
+body {
+  @include body-font;
+  font-size: 16px;
+}
+
+.heading {
+  @include accent-font-bold;
+  font-size: 2em;
+}
+
+.title {
+  @include accent-font;
+  font-size: 1.5em;
+}
+
+.subtitle {
+  @include body-font-light;
+  font-size: 0.8em;
+}
