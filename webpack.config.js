@@ -18,10 +18,6 @@ module.exports = {
         use: ["babel-loader", "eslint-loader"]
       },
       {
-        test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
-      },
-      {
         test: /\.html$/,
         use: [
           {
@@ -41,24 +37,40 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.(png|jp(e*)g|svg)$/,
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              limit: 8000, // Convert images < 8kb to base64 strings
+              name: "images/[hash]-[name].[ext]"
+            }
+          }
+        ]
       }
     ]
   },
   plugins: [
+    new HtmlWebPackPlugin({
+      template: "./src/index.html",
+      filename: "./index.html"
+    }),
+    new HtmlWebPackPlugin({
+      template: "./src/about.html",
+      filename: "./about.html"
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    }),
     new CopyWebpackPlugin([
       {
         from: "./src/static/",
         to: "./static/"
       }
-    ]),
-    new HtmlWebPackPlugin({
-      template: "./src/index.html",
-      filename: "./index.html"
-    }),
-    new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
-    })
+    ])
   ],
   stats: {
     colors: true

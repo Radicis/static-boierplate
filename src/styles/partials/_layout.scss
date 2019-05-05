@@ -1,4 +1,4 @@
-@import '../mixins/breakpoints';
+@import "../mixins/breakpoints";
 
 .wrapper {
   padding: 30px;
@@ -6,4 +6,6 @@
 
 .container {
   padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
 }
