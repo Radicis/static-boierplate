@@ -1,27 +1,25 @@
-const path = require('path');
+const path = require("path");
+const glob = require("glob");
+
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-// List all pages by filename in the project
-const pages = [
-  'index',
-  'about'
-];
-
 // Create a new html plugin to create each page
-const htmlPlugins = pages.map(p => {
-  return new HtmlWebPackPlugin({
-    template: `./src/${p}.html`,
-    filename: `./${p}.html`
-  });
-});
+const generateHTMLPlugins = () =>
+  glob.sync("./src/**/*.html").map(
+    dir =>
+      new HtmlWebPackPlugin({
+        filename: path.basename(dir), // Output
+        template: dir // Input
+      })
+  );
 
 module.exports = {
   entry: ["./src/js/index.js", "./src/styles/main.scss"],
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[hash].js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].[hash].js"
   },
   module: {
     rules: [
@@ -72,7 +70,6 @@ module.exports = {
     ]
   },
   plugins: [
-    ...htmlPlugins,
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[hash].css"
@@ -82,9 +79,11 @@ module.exports = {
         from: "./src/static/",
         to: "./static/"
       }
-    ])
+    ]),
+    ...generateHTMLPlugins()
   ],
   stats: {
     colors: true
-  }
+  },
+  devtool: "source-map"
 };
