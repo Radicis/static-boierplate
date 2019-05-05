@@ -1,3 +1,4 @@
+const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
@@ -18,6 +19,10 @@ const htmlPlugins = pages.map(p => {
 
 module.exports = {
   entry: ["./src/js/index.js", "./src/styles/main.scss"],
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].[hash].js',
+  },
   module: {
     rules: [
       {
@@ -70,7 +75,7 @@ module.exports = {
     ...htmlPlugins,
     new MiniCssExtractPlugin({
       filename: "[name].css",
-      chunkFilename: "[id].css"
+      chunkFilename: "[hash].css"
     }),
     new CopyWebpackPlugin([
       {
