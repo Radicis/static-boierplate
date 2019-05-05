@@ -2,6 +2,20 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
+// List all pages by filename in the project
+const pages = [
+  'index',
+  'about'
+];
+
+// Create a new html plugin to create each page
+const htmlPlugins = pages.map(p => {
+  return new HtmlWebPackPlugin({
+    template: `./src/${p}.html`,
+    filename: `./${p}.html`
+  });
+});
+
 module.exports = {
   entry: ["./src/js/index.js", "./src/styles/main.scss"],
   module: {
@@ -53,14 +67,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebPackPlugin({
-      template: "./src/index.html",
-      filename: "./index.html"
-    }),
-    new HtmlWebPackPlugin({
-      template: "./src/about.html",
-      filename: "./about.html"
-    }),
+    ...htmlPlugins,
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css"
