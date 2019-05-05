@@ -12,11 +12,13 @@ Based on https://github.com/erickzhao/static-html-webpack-boilerplate
 - ES6+ to ES5 transpilation, bundling, and minification and seperation of vendor scripts
 - SCSS to CSS transpilation, bundling, autoprefixing, and minification
 - Automatic copying of HTML and static assets from `src` to `dist` folders
+- Sass mixins for breakpoints, flex and more.
+- Local font loading via Sass mixin (needs work to be more generic) to allow for 2 google fonts to be used
 - Linting for styles and scripts
 
 ## 🛠 Usage
 
-- Write all your ES2015+ Javascript code in `src/js` and SCSS styling in `src/style`. 
+- Write all your modern Javascript code in `src/js` and SCSS styling in `src/style`. 
 - Store static assets in `src/static`. 
 - Organize HTML files the way you like but only at the same directory level right now
 - Available commands:

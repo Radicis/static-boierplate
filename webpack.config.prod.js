@@ -1,14 +1,15 @@
-const CssNano = require('cssnano');
-const WebPackMerge = require('webpack-merge');
+const cssnano = require('cssnano');
+const merge = require('webpack-merge');
+
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const GlobalConfig = require('./webpack.config.js');
+const globalConfig = require('./webpack.config.js');
 
 
-module.exports = WebPackMerge(GlobalConfig, {
+module.exports = merge(globalConfig, {
   mode: 'production',
   optimization: {
     minimize: true,
@@ -48,20 +49,20 @@ module.exports = WebPackMerge(GlobalConfig, {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new CopyWebpackPlugin([
       {
         from: "./src/static/",
         to: "./static/"
       }
     ]),
-    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].[hash].css',
       chunkFilename: '[hash].css',
     }),
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
-      cssProcessor: CssNano,
+      cssProcessor: cssnano,
       cssProcessorOptions: { discardComments: { removeAll: true } },
       canPrint: true,
     }),

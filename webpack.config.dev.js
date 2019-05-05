@@ -1,7 +1,7 @@
-const WebPackMerge = require('webpack-merge');
-const GlobalConfig = require('./webpack.config.js');
+const merge = require('webpack-merge');
+const globalConfig = require('./webpack.config.js');
 
-module.exports = WebPackMerge(GlobalConfig, {
+module.exports = merge(globalConfig, {
   mode: 'development',
   module: {
     rules: [
